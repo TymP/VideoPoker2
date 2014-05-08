@@ -2,7 +2,6 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
 
-
 public class Deck {
 
 	public Card[] cards;
@@ -39,7 +38,6 @@ public class Deck {
 		this.cards = replace; //overwrite
 	}
 
-	
 	public void removeCard(Integer[] indexesToRemove)
 	{
 		Card[] replacement = new Card[cards.length - indexesToRemove.length]; // Create new Card array of new length.
@@ -71,7 +69,6 @@ public class Deck {
 		
 			return handFull;
 	}
-	
 	
 	/*
 	 * Creates an array of size given by input containing random, unique integers from 0 to array length. 

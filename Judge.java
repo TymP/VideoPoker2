@@ -3,35 +3,7 @@ import java.util.Arrays;
 
 public class Judge {
 
-	/**
-	 * @param args
-	 */
-	// public int score(Player jugador) {
-	// Card[] hand = jugador.getHand();
-	// }
-
-	public boolean hasStraightFlush(Card[] hand){
-		if (hasStraight(hand) == true && hasFlush(hand)==true)
-		{
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	
-	public boolean hasFlush(Card[] hand) {
-		String trySuit = hand[0].suit;
-		boolean result = true;
-		for (int i = 1; i < hand.length; i++) {
-			if (hand[i].suit != trySuit) {
-				result = false;
-			}
-		}
-		return result;
-	}
-
-	public ArrayList<Card> convertToArrayList(Card[] pile) {
+		public ArrayList<Card> convertToArrayList(Card[] pile) {
 		ArrayList<Card> mano = new ArrayList<Card>();
 		for (Card card : pile) {
 			mano.add(card);
@@ -83,7 +55,44 @@ public class Judge {
 			//nothing.
 		}
 	}
-		
+	
+	/*
+	 * Takes in an array of indexes to remove from the instance variable hand( type Card[]) and removes them.
+	 */
+	public Card[] removeCard(Integer[] indexesToRemove, Card[] hand)
+	{
+		Card[] replacementHand = new Card[hand.length - indexesToRemove.length]; // Create new Card array of new length.
+		int newArrayIndex = 0; // set starting index on the new array.
+		for(Integer i =0; i<hand.length; i++){ //Iterate through each index of the old hand. 
+			if(Arrays.asList(indexesToRemove).contains(i)== false){ // if the current index is not included in the list of indexes to remove:
+				replacementHand[newArrayIndex]=hand[i]; //copy this index of the current hand to the current index of the replacement hand.
+				newArrayIndex+=1;// shift to the next index of the replacement hand. 
+			}
+		}
+		return replacementHand; //overwrite
+	}
+	
+	public boolean hasStraightFlush(Card[] hand){
+		if (hasStraight(hand) == true && hasFlush(hand)==true)
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public boolean hasFlush(Card[] hand) {
+		String trySuit = hand[0].suit;
+		boolean result = true;
+		for (int i = 1; i < hand.length; i++) {
+			if (hand[i].suit != trySuit) {
+				result = false;
+			}
+		}
+		return result;
+	}
+	
 	/*
 	 * Takes an integer of the size of the group to look for, and a Card[] array. Returns true if this size of a group of cards with the same value exists.
 	 */
@@ -104,23 +113,7 @@ public class Judge {
 		}
 		return result;
 	}
-	/*
-	 * Takes in an array of indexes to remove from the instance variable hand( type Card[]) and removes them.
-	 */
-	public Card[] removeCard(Integer[] indexesToRemove, Card[] hand)
-	{
-		Card[] replacementHand = new Card[hand.length - indexesToRemove.length]; // Create new Card array of new length.
-		int newArrayIndex = 0; // set starting index on the new array.
-		for(Integer i =0; i<hand.length; i++){ //Iterate through each index of the old hand. 
-			if(Arrays.asList(indexesToRemove).contains(i)== false){ // if the current index is not included in the list of indexes to remove:
-				replacementHand[newArrayIndex]=hand[i]; //copy this index of the current hand to the current index of the replacement hand.
-				newArrayIndex+=1;// shift to the next index of the replacement hand. 
-			}
-		}
-		return replacementHand; //overwrite
-	}
-	
-	
+		
 	public boolean hasFullHouse(Card[] hand){
 		boolean result = true;
 		//Check if the hand has three of a kind.
@@ -151,6 +144,39 @@ public class Judge {
 		return result;
 	}
 	
+	public boolean hasStraight(Card[] hand) {
+		int[] mano = stripValues(hand); //Create int array of card values.
+		int start = findMinIndex(mano); //Find the index of the minimum value of the array, start there.
+		boolean result = false;
+		int i = 0;
+		while (true) {
+			i += 1;
+			if (contains(mano, mano[start] + 1) == true) { //if the next value up is in the hand
+				start = findIndex(mano, mano[start]+1); //
+			} 
+			else { //if the hand does not contain the next value from the current one, break the loop.
+				break;
+			}
+
+		}
+		if (i > hand.length-1) { //if we incremented through all the indexes of the hand, we have a straight.
+			result = true;
+		}
+	return result;
+	}
+
+	public boolean hasFour(Card[] hand) {
+		return hasGroup(4, hand);
+	}
+
+	public boolean hasPair(Card[] hand) {
+		return hasGroup(2, hand);
+	}
+
+	public boolean hasThree(Card[] hand) {
+		return hasGroup(3, hand);
+	}
+
 	/*Method returns int array conaining the indeces of a card repeated a certain number of times.
 	 * 
 	 */
@@ -213,39 +239,7 @@ public class Judge {
 		return result;
 	}
 	
-	public boolean hasStraight(Card[] hand) {
-		int[] mano = stripValues(hand); //Create int array of card values.
-		int start = findMinIndex(mano); //Find the index of the minimum value of the array, start there.
-		boolean result = false;
-		int i = 0;
-		while (true) {
-			i += 1;
-			if (contains(mano, mano[start] + 1) == true) { //if the next value up is in the hand
-				start = findIndex(mano, mano[start]+1); //
-			} 
-			else { //if the hand does not contain the next value from the current one, break the loop.
-				break;
-			}
-
-		}
-		if (i > hand.length-1) { //if we incremented through all the indexes of the hand, we have a straight.
-			result = true;
-		}
-	return result;
-	}
-
-	public boolean hasFour(Card[] hand) {
-		return hasGroup(4, hand);
-	}
-
-	public boolean hasPair(Card[] hand) {
-		return hasGroup(2, hand);
-	}
-
-	public boolean hasThree(Card[] hand) {
-		return hasGroup(3, hand);
-	}
-	/*
+		/*
 	 * Takes in an array of cards, returns an int array of their values.
 	 */
 	public int[] stripValues(Card[] hand) {

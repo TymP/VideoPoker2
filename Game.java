@@ -1,9 +1,6 @@
 
 public class Game {
 
-	/**
-	 * @param args
-	 */
 	public void play(){
 		//Initialise user interface and judge.
 		UI ui = new UI();

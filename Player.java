@@ -2,11 +2,9 @@ import java.util.Arrays;
 
 public class Player {
 
-	/**
-	 * @param args
-	 */
 	public Card[] hand;
-		/* Player is initialised with an array of cards, forming the instance variable hand.
+	
+	/* Player is initialised with an array of cards, forming the instance variable hand.
 	 * 
 	 */
 	public Player(Card[] startHand)
@@ -51,10 +49,6 @@ public class Player {
 		this.hand = replacementHand; // Overwrite
 			
 	}
-	
-	
-	
-	
-	
+		
 }
 
