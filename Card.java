@@ -12,9 +12,6 @@ public class Card {
 				
 	}
 
-	/**
-	 * @param args
-	 */
 	public String getSuit() {
 		return suit;
 
