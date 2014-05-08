@@ -4,17 +4,18 @@ import java.util.Scanner;
 
 public class UI 
 {
-
-	/**
-	 * @param args
+	/*
+	 * Takes in an integer representing score of player's hand, prints out the corresponding string.
 	 */
-	
 	public void interpretScore(int score){
 		String[] scoreVec = new String[] {"Nothing", "a pair", "Two Pairs", "Three of a kind", "a straight", "a flush", "a full House","Four of a kind", "a traight Flush", "a Royal Flush!"};
 		System.out.println("You have  " + scoreVec[score]);
 		System.out.println("\r");
 	}
 	
+	/*
+	 * takes user input to define an array of indexes to remove from the player's hand.
+	 */
 	public Integer[] choose()
 	{
 		Scanner sc = new Scanner(System.in);
@@ -26,6 +27,9 @@ public class UI
 		System.out.println("OK!");
 		return toIntArray(remove);
 	}
+	/*
+	 * Interacts with user to stop or continue game loop. 
+	 */
 	public boolean stop(){
 		boolean result = false;
 		Scanner sc = new Scanner(System.in);
@@ -37,6 +41,7 @@ public class UI
 		}
 		return result;
 	}
+	
 	public Integer[] toIntArray(ArrayList<Integer> toConvert){
 		Integer[] result = new Integer[toConvert.size()];
 		for(int i = 0 ; i<result.length;i++){
@@ -58,7 +63,9 @@ public class UI
 		}
 		System.out.println('\r');
 	}
-	
+	/*
+	 * Converts face cards' card values to faces for display to user.
+	 */
 	public String getFace(int val){
 		String result= null;
 		switch (val)
@@ -76,4 +83,3 @@ public class UI
 	}
 	
 }
-

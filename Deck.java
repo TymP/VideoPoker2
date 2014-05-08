@@ -22,14 +22,14 @@ public class Deck {
 			for (int j = 0; j < values.length; j++) {
 				cards[cardIndex] = new Card(suits[i], values[j]);
 				cardIndex+=1;
-
 			}
-
 		}
 		shuffle();
-
 	}
-
+	
+	/*
+	 * Shuffles the deck.
+	 */
 	public void shuffle() {
 		int[] order = preShuffle(cards.length);
 		Card[] replace = new Card[cards.length]; //create replacement array for shuffled deck.
@@ -49,13 +49,13 @@ public class Deck {
 				replacement[replacementIndex]=cards[i]; //copy this index of the current hand to the current index of the replacement hand.
 				replacementIndex+=1;// shift to the next index of the replacement hand. 
 			}
-			
-			
 		}
 		cards = replacement; //overwrite
 	}
 	
-		
+	/*
+	 * Takes an integer input. Removes that many cards from the deck and returns them as a Card[] array.	
+	 */
 	public Card[] deal(int howMany) {
 		// Initialise return array
 		Card[] handFull = new Card[howMany];
@@ -72,9 +72,12 @@ public class Deck {
 			return handFull;
 	}
 	
+	
+	/*
+	 * Creates an array of size given by input containing random, unique integers from 0 to array length. 
+	 */
 	public int[] preShuffle(int size)
 	{
-		
 		Random rn = new Random();
 		ArrayList<Integer> possibleIndexes = new ArrayList<Integer>(); //initialise an array list (mutable array length)
 		
@@ -86,11 +89,12 @@ public class Deck {
 			int random = rn.nextInt(possibleIndexes.size());// picks a random index of the arrayList. As the list shrinks the indeces available shrink. 
 			result[i] = possibleIndexes.remove(random); // remove number at this index. Sets this iteration of the return array = to this value. 
 		}
-		return result;
-			
+		return result;			
 	}
 	
-
+	/*Takes input of an int array and an int. Returns true if int is in the array.
+	 * 
+	 */
 	public boolean contains(int[] vector, int num){
 		boolean result = false;
 		for (int number : vector){

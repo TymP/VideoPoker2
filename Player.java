@@ -1,7 +1,4 @@
 import java.util.Arrays;
-import java.util.Scanner;
-import java.util.ArrayList;
-
 
 public class Player {
 
@@ -20,7 +17,9 @@ public class Player {
 	public Card[] getHand(){
 		return hand;
 	}
-	
+	/*
+	 * Takes in an array of indexes to remove from the instance variable hand( type Card[]) and removes them.
+	 */
 	public void removeCard(Integer[] indexesToRemove)
 	{
 		Card[] replacementHand = new Card[hand.length - indexesToRemove.length]; // Create new Card array of new length.
@@ -30,12 +29,13 @@ public class Player {
 				replacementHand[newArrayIndex]=hand[i]; //copy this index of the current hand to the current index of the replacement hand.
 				newArrayIndex+=1;// shift to the next index of the replacement hand. 
 			}
-			
-			
 		}
 		hand = replacementHand; //overwrite
 	}
 	
+	/*
+	 * Takes in an array of cards, adds them to the instance variable hand. 
+	 */
 	public void addCard(Card[] cardsToAdd){
 		Card[] replacementHand = new Card[hand.length + cardsToAdd.length]; // create a replacement hand of increased length.
 		int replacementHandIndex = 0; //initialise the first index of the replacement hand. 

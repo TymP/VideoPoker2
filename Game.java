@@ -9,29 +9,25 @@ public class Game {
 		UI ui = new UI();
 		Judge judge = new Judge();
 		System.out.println("Welcome to Video Poker!" + '\r');
-		while (true){
-			Deck deck = new Deck();
+		while (true){ //Game loop.
+			Deck deck = new Deck();//Initialise deck, shuffles in constructor.
 			System.out.println("Shuffling the deck.");
-			try{
-				Thread.sleep(2000);
+			try{ // Shuffle time.
+				Thread.sleep(1500);
 			} catch (InterruptedException e){
 				e.printStackTrace();
 			}
-			Player player = new Player(deck.deal(5));
+			Player player = new Player(deck.deal(5));//Initialise player witha  new hand dealt from the deck.
 			ui.displayHand(player);
-			Integer[] exchangeArray = ui.choose();
-			player.removeCard(exchangeArray);
-			player.addCard(deck.deal(exchangeArray.length));
+			Integer[] exchangeArray = ui.choose();//Define indexes player wishes to exchange.
+			player.removeCard(exchangeArray);//remove them. 
+			player.addCard(deck.deal(exchangeArray.length));//deal cards to replace removed indexes
 			ui.displayHand(player);
 			ui.interpretScore(judge.score(player.getHand()));
-			if(ui.stop() ==true){
+			if(ui.stop() ==true){ //Stop condition.
 				System.out.println("Thanks for playing.");
 				break;
 			}
 		}
-		
-		
-
 	}
-
 }
