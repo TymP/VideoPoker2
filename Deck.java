@@ -11,7 +11,8 @@ public class Deck {
 	 * Initialises the instance of deck. Fills the instance variable (array)
 	 * cards by calling the constructor on each slot, initialising a new card.
 	 */
-	public Deck() {
+	public Deck() 
+	{
 		cards = new Card[DECK_SIZE];
 		String[] suits = { "spades", "diamonds", "hearts", "clubs" };
 		int[] values = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,14 };
@@ -29,7 +30,8 @@ public class Deck {
 	/*
 	 * Shuffles the deck.
 	 */
-	public void shuffle() {
+	public void shuffle() 
+	{
 		int[] order = preShuffle(cards.length);
 		Card[] replace = new Card[cards.length]; //create replacement array for shuffled deck.
 		for(int i = 0; i<cards.length; i++){
@@ -54,7 +56,8 @@ public class Deck {
 	/*
 	 * Takes an integer input. Removes that many cards from the deck and returns them as a Card[] array.	
 	 */
-	public Card[] deal(int howMany) {
+	public Card[] deal(int howMany) 
+	{
 		// Initialise return array
 		Card[] handFull = new Card[howMany];
 		
@@ -92,7 +95,8 @@ public class Deck {
 	/*Takes input of an int array and an int. Returns true if int is in the array.
 	 * 
 	 */
-	public boolean contains(int[] vector, int num){
+	public boolean contains(int[] vector, int num)
+	{
 		boolean result = false;
 		for (int number : vector){
 			if(number == num){

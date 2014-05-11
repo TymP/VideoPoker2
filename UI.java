@@ -3,6 +3,11 @@ import java.util.Scanner;
 
 public class UI 
 {
+	public static final int ACE= 14;
+	public static final int KING = 13;
+	public static final int QUEEN = 12;
+	public static final int JACK = 11;
+	
 	/*
 	 * Takes in an integer representing score of player's hand, prints out the corresponding string.
 	 */
@@ -29,7 +34,8 @@ public class UI
 	/*
 	 * Interacts with user to stop or continue game loop. 
 	 */
-	public boolean stop(){
+	public boolean stop()
+	{
 		boolean result = false;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Stop? Type stop to stop.");
@@ -41,7 +47,8 @@ public class UI
 		return result;
 	}
 	
-	public Integer[] toIntArray(ArrayList<Integer> toConvert){
+	public Integer[] toIntArray(ArrayList<Integer> toConvert)
+	{
 		Integer[] result = new Integer[toConvert.size()];
 		for(int i = 0 ; i<result.length;i++){
 			result[i] = toConvert.get(i).intValue();
@@ -49,7 +56,8 @@ public class UI
 		return result;
 	}
 	
-	public void displayHand(Player jugador){
+	public void displayHand(Player jugador)
+	{
 		System.out.println("Here's your hand: "+'\r');
 		for(Card card : jugador.getHand()){
 			if(card.value>1 && card.value<11){
@@ -65,17 +73,17 @@ public class UI
 	/*
 	 * Converts face cards' card values to faces for display to user.
 	 */
-	public String getFace(int val){
+	public String getFace(int val)
+	{
 		String result= null;
-		switch (val)
-		{
-			case 14: result = "Ace";//aces high
+		switch (val){
+			case ACE: result = "Ace";//aces high
 					break;
-			case 11:result = "Jack";
+			case JACK:result = "Jack";
 					break;
-			case 12: result = "Queen";
+			case QUEEN: result = "Queen";
 					break;
-			case 13: result = "King";
+			case KING: result = "King";
 					break;
 		}
 		return result;

@@ -9,10 +9,10 @@ public class Card {
 	public Card(String suit, int value){
 		this.suit = suit;
 		this.value = value;
-				
 	}
 
-	public String getSuit() {
+	public String getSuit() 
+	{
 		return suit;
 
 	}

@@ -2,8 +2,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Judge {
-
-		public ArrayList<Card> convertToArrayList(Card[] pile) {
+	
+	//Return values
+	public static final int ROYAL_FLUSH = 9;
+	public static final int STRAIGHT_FLUSH = 8;
+	public static final int FOUR_OF_A_KIND = 7;
+	public static final int FULL_HOUSE = 6;
+	public static final int FLUSH = 5;
+	public static final int STRAIGHT = 4;
+	public static final int THREE_OF_A_KIND = 3;
+	public static final int TWO_PAIR = 2;
+	public static final int PAIR = 1;
+	public static final int NOTHING = 0;
+	
+	public ArrayList<Card> convertToArrayList(Card[] pile) 
+	{
 		ArrayList<Card> mano = new ArrayList<Card>();
 		for (Card card : pile) {
 			mano.add(card);
@@ -14,45 +27,37 @@ public class Judge {
 	/*
 	 * Evaluates a Card[] input, checking the score of the hand in descending order.
 	 */
-	public int score(Card[] hand){
-		if(hasStraightFlush(hand)==true && contains(stripValues(hand), 12) ==true){
-			return 9;
-			//Royal Flush!
+	public int score(Card[] hand)
+	{
+		if(hasStraightFlush(hand)==true && contains(stripValues(hand), UI.ACE) ==true){
+			return ROYAL_FLUSH;
 		}
 		else if(hasStraightFlush(hand)){
-			return 8;
-			//Straight Flush.
+			return STRAIGHT_FLUSH;
 		}
 		else if(hasGroup(4,hand)){
-			return 7;
-			//Four of a Kind
+			return FOUR_OF_A_KIND;
 		}
 		else if(hasFullHouse(hand)){
-			return 6;
-			//Full House.
+			return FULL_HOUSE;
 		}
 		else if(hasFlush(hand)){
-			return 5;
+			return FLUSH;
 		}
 		else if(hasStraight(hand)){
-			return 4;
-			//Straight
+			return STRAIGHT;
 		}
 		else if(hasThree(hand)){
-			return 3;
-			//Three
+			return THREE_OF_A_KIND;
 		}
 		else if(hasTwoPair(hand)){
-			return 2;
-			//two pair.
+			return TWO_PAIR;
 		}
 		else if(hasPair(hand)){
-			return 1;
-			//pair
+			return PAIR;
 		}
 		else{
-			return 0;
-			//nothing.
+			return NOTHING;
 		}
 	}
 	
@@ -72,7 +77,8 @@ public class Judge {
 		return replacementHand; //overwrite
 	}
 	
-	public boolean hasStraightFlush(Card[] hand){
+	public boolean hasStraightFlush(Card[] hand)
+	{
 		if (hasStraight(hand) == true && hasFlush(hand)==true)
 		{
 			return true;
@@ -82,7 +88,8 @@ public class Judge {
 		}
 	}
 	
-	public boolean hasFlush(Card[] hand) {
+	public boolean hasFlush(Card[] hand) 
+	{
 		String trySuit = hand[0].suit;
 		boolean result = true;
 		for (int i = 1; i < hand.length; i++) {
@@ -96,7 +103,8 @@ public class Judge {
 	/*
 	 * Takes an integer of the size of the group to look for, and a Card[] array. Returns true if this size of a group of cards with the same value exists.
 	 */
-	public boolean hasGroup(int howMany, Card[] hand) {
+	public boolean hasGroup(int howMany, Card[] hand) 
+	{
 		int[] values = stripValues(hand); //Creates array of the cards' values.
 		boolean result = false;
 		for (int i = 0; i < values.length; i++) {
@@ -114,7 +122,8 @@ public class Judge {
 		return result;
 	}
 		
-	public boolean hasFullHouse(Card[] hand){
+	public boolean hasFullHouse(Card[] hand)
+	{
 		boolean result = true;
 		//Check if the hand has three of a kind.
 		if (hasThree(hand) == false){
@@ -129,7 +138,8 @@ public class Judge {
 		return result;
 	}
 	
-	public boolean hasTwoPair(Card[] hand){
+	public boolean hasTwoPair(Card[] hand)
+	{
 		boolean result = true;
 		//Check if the hand has a pair.
 		if (hasPair(hand) == false){
@@ -144,7 +154,8 @@ public class Judge {
 		return result;
 	}
 	
-	public boolean hasStraight(Card[] hand) {
+	public boolean hasStraight(Card[] hand) 
+	{
 		int[] mano = stripValues(hand); //Create int array of card values.
 		int start = findMinIndex(mano); //Find the index of the minimum value of the array, start there.
 		boolean result = false;
@@ -165,22 +176,26 @@ public class Judge {
 	return result;
 	}
 
-	public boolean hasFour(Card[] hand) {
+	public boolean hasFour(Card[] hand) 
+	{
 		return hasGroup(4, hand);
 	}
 
-	public boolean hasPair(Card[] hand) {
+	public boolean hasPair(Card[] hand) 
+	{
 		return hasGroup(2, hand);
 	}
 
-	public boolean hasThree(Card[] hand) {
+	public boolean hasThree(Card[] hand) 
+	{
 		return hasGroup(3, hand);
 	}
 
 	/*Method returns int array conaining the indeces of a card repeated a certain number of times.
 	 * 
 	 */
-	public Integer[] findGroupIndexes(int howMany, Card[] hand) {
+	public Integer[] findGroupIndexes(int howMany, Card[] hand) 
+	{
 		int[] values = stripValues(hand);
 		Integer[] result = new Integer[howMany];
 		for (int i = 0; i < values.length; i++) {
@@ -203,7 +218,8 @@ public class Judge {
 	/*
 	 * Returns the index of the minimum value in an int[] array.
 	 */
-	public int findMinIndex(int[] list) {
+	public int findMinIndex(int[] list) 
+	{
 		int minNum = Integer.MAX_VALUE;
 		for (int num : list) {
 			minNum = Math.min(num, minNum);
@@ -214,7 +230,8 @@ public class Judge {
 	/*
 	 * Returns the index of the integer given as input in the int[] array given as input.
 	 */
-	public int findIndex(int[] list, int value){
+	public int findIndex(int[] list, int value)
+	{
 		int result = -1; 
 		for (int i = 0; i < list.length; i++) {
 			if (list[i] == value) 
@@ -223,13 +240,13 @@ public class Judge {
 			}
 		}
 		return result;
-			
 	}
 	
 	/*
 	 * Returns true if the input int array contains the input int.
 	 */
-	public boolean contains(int[] array, int key) {
+	public boolean contains(int[] array, int key) 
+	{
 		boolean result = false;
 		for (int term : array) {
 			if (term == key) {
@@ -242,7 +259,8 @@ public class Judge {
 		/*
 	 * Takes in an array of cards, returns an int array of their values.
 	 */
-	public int[] stripValues(Card[] hand) {
+	public int[] stripValues(Card[] hand) 
+	{
 		int[] values = new int[hand.length];
 		for (int i = 0; i < values.length; i++) {
 			values[i] = hand[i].value;

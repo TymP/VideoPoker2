@@ -1,7 +1,8 @@
 
 public class Game {
 
-	public void play(){
+	public void play()
+	{
 		//Initialise user interface and judge.
 		UI ui = new UI();
 		Judge judge = new Judge();
@@ -10,7 +11,7 @@ public class Game {
 			Deck deck = new Deck();//Initialise deck, shuffles in constructor.
 			System.out.println("Shuffling the deck.");
 			try{ // Shuffle time.
-				Thread.sleep(1500);
+				Thread.sleep(1100);
 			} catch (InterruptedException e){
 				e.printStackTrace();
 			}
