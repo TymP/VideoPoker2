@@ -1,6 +1,6 @@
 import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Deck {
 
@@ -39,7 +39,25 @@ public class Deck {
 		}
 		this.cards = replace; //overwrite
 	}
-
+	
+	public void shuffle2(){
+		//create replacement blank card
+		//take random card 1
+		Random rnd = new Random();
+		
+		int strokes = 0;
+		int choiceOne;
+		int choiceTwo;
+		while(strokes<1000){
+			strokes++;
+			choiceOne = rnd.nextInt(52);
+			choiceTwo = rnd.nextInt(52);
+						
+			Card replacementCard = cards[choiceOne];
+			cards[choiceOne] = cards[choiceTwo];
+			cards[choiceTwo] = replacementCard;
+		}
+	}
 	public void removeCard(Integer[] indexesToRemove)
 	{
 		Card[] replacement = new Card[cards.length - indexesToRemove.length]; // Create new Card array of new length.
